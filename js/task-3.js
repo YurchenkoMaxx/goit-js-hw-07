@@ -1,32 +1,35 @@
-class StringBuilder {
-  #value;
-  constructor(initialValue = "") {
-    this.#value = initialValue;
-  }
-  getValue() {
-    return this.#value;
-  }
-  padEnd(str) {
-    this.#value += str;
-    return this;
-}
-  padStart(str) {
-    this.#value = str + this.#value;
-    return this;
-}
-
-  padBoth(str) {
-    return this.padStart(str) . padEnd(str);
-}
-
-}
+// Напиши скрипт, який під час набору тексту в інпуті input#name-input (подія input)
+//  підставляє його поточне значення в span#name-output як ім’я для привітання.
+//  Обов’язково очищай значення в інпуті по краях від пробілів .
+//  Якщо інпут порожній або містить лише пробіли, то замість імені у спан має
+//  підставлятися рядок "Anonymous".
 
 
-const builder = new StringBuilder(".");
-console.log(builder.getValue()); // "."
-builder.padStart("^");
-console.log(builder.getValue()); // "^."
-builder.padEnd("^");
-console.log(builder.getValue()); // "^.^"
-builder.padBoth("=");
-console.log(builder.getValue()); // "=^.^="
+
+// <input type="text" id="name-input" placeholder="Please enter your name" />
+// <h1>Hello, <span id="name-output">Anonymous</span>!</h1>
+
+// На що буде звертати увагу ментор при перевірці:
+
+// На елементі input#name-input прослуховується подія input
+// Під час набору тексту в інпуті його поточне значення підставляється в
+// span#name-output як ім’я для привітання
+// Значення в інпуті очищене від пробілів по краях
+// Якщо інпут порожній або містить лише пробіли, то замість імені у спан
+//  має підставлятися рядок "Anonymous"
+
+
+const usernameInput = document.querySelector('#name-input');
+const usernameOutput = document.querySelector('#name-output')
+
+usernameInput.addEventListener('input', handleUserNameInput);
+
+    function handleUserNameInput(e) {
+        const userValue = e.target.value.trim();
+        if (userValue === "") {
+            usernameOutput.textContent = usernameOutput;
+        } else {
+            usernameOutput.textContent = userValue;
+        }
+
+    }
